@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ContactList from "./ContactList/ContactList";
+import SearchBox from "./SearchBox/SearchBox";
 import "./App.css";
 
 function App() {
@@ -10,10 +11,22 @@ function App() {
     { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
   ]);
 
+  const [inputValue, setInputValue] = useState("");
+
+  const handleChange = (evt) => {
+    setInputValue(evt.target.value);
+    console.log("Поточне значення:", evt.target.value); //перевірка введення даних
+  };
+
+  const filteredContacts = contactList.filter((contact) =>
+    contact.name.toLowerCase().includes(inputValue.toLowerCase())
+  );
+
   return (
     <div>
       <h1>Phonebook</h1>
-      <ContactList contacts={contactList} />
+      <SearchBox inputValue={inputValue} handleChange={handleChange} />
+      <ContactList contacts={filteredContacts} />
     </div>
   );
 }
