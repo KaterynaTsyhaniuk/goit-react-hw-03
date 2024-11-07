@@ -1,4 +1,5 @@
 .formBox {
+  background-color: rgba(190, 242, 242, 0.882);
   max-width: 400px;
   display: flex;
   flex-direction: column;
@@ -10,7 +11,7 @@
 .formInfo {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 }
 
 .labelForm {
@@ -19,7 +20,7 @@
 }
 
 .inputForm {
-  background-color: rgba(190, 242, 242, 0.882);
+  background-color: white;
   border-radius: 5px;
   padding-left: 10px;
   height: 30px;

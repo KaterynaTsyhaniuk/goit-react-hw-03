@@ -1,17 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ContactList from "./ContactList/ContactList";
 import SearchBox from "./SearchBox/SearchBox";
 import "./App.css";
 import ContactForm from "./ContactForm/ContactForm";
 import { nanoid } from "nanoid";
+import contactsData from "../assets/contactsData.json";
 
 function App() {
-  const [contactList, setContactList] = useState([
-    { id: nanoid(), name: "Rosie Simpson", number: "459-12-56" },
-    { id: nanoid(), name: "Hermione Kline", number: "443-89-12" },
-    { id: nanoid(), name: "Eden Clements", number: "645-17-79" },
-    { id: nanoid(), name: "Annie Copeland", number: "227-91-26" },
-  ]);
+  const [contactList, setContactList] = useState(
+    () =>
+      JSON.parse(localStorage.getItem("contactList")) ??
+      contactsData.map((contact) => ({
+        ...contact,
+        id: nanoid(),
+      }))
+  );
+
+  useEffect(() => {
+    localStorage.setItem("contactList", JSON.stringify(contactList));
+  }, [contactList]);
 
   const [inputValue, setInputValue] = useState("");
 
@@ -40,7 +47,6 @@ function App() {
   return (
     <div>
       <h1>Phonebook</h1>
-
       <ContactForm onAddContact={handleAddContact} />
       <SearchBox inputValue={inputValue} handleChange={handleChange} />
       <ContactList
