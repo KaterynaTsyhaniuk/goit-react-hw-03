@@ -15,6 +15,12 @@ function App() {
 
   const [inputValue, setInputValue] = useState("");
 
+  const handleDeleteContact = (id) => {
+    console.log(id);
+    // const newContactList = contactList.filter((item) => item.id != id);
+    setContactList((prev) => prev.filter((item) => item.id != id));
+  };
+
   const handleChange = (evt) => {
     setInputValue(evt.target.value);
     console.log("Поточне значення:", evt.target.value); //перевірка введення даних
@@ -37,7 +43,10 @@ function App() {
 
       <ContactForm onAddContact={handleAddContact} />
       <SearchBox inputValue={inputValue} handleChange={handleChange} />
-      <ContactList contacts={filteredContacts} />
+      <ContactList
+        contacts={filteredContacts}
+        handleDeleteContact={handleDeleteContact}
+      />
     </div>
   );
 }
