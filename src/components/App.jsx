@@ -30,7 +30,7 @@ function App() {
 
   const handleChange = (evt) => {
     setInputValue(evt.target.value);
-    console.log("Поточне значення:", evt.target.value); //перевірка введення даних
+    console.log("Поточне значення:", evt.target.value);
   };
 
   const filteredContacts = contactList.filter((contact) =>
